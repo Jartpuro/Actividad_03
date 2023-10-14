@@ -1,0 +1,1283 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Actividad\_03},
+  pdfauthor={Jhon Alexander Rojas Tavera},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Actividad\_03}
+\author{Jhon Alexander Rojas Tavera}
+\date{2023-10-13}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\begin{verbatim}
+## package 'devtools' successfully unpacked and MD5 sums checked
+## 
+## The downloaded binary packages are in
+##  C:\Users\jartp\AppData\Local\Temp\RtmpIHY8qQ\downloaded_packages
+\end{verbatim}
+
+Problema
+
+Con base en los datos de ofertas de vivienda descargadas del portal
+Fincaraiz para apartamento de estrato 4 con área construida menor a 200
+m\^{}2 (vivienda4.RDS) la inmobiliaria A\&C requiere el apoyo de un
+científico de datos en la construcción de un modelo que lo oriente sobre
+los precios de inmuebles. Con este propósito el equipo de asesores a
+diseñado los siguientes pasos para obtener un modelo y así poder a
+futuro determinar los precios de los inmuebles a negociar
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Realice un análisis exploratorio de las variables precio de vivienda
+  (millones de pesos COP) y área de la vivienda (metros cuadrados) -
+  incluir gráficos e indicadores apropiados interpretados.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(vivienda4)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{cargar-las-libreruxedas-necesarias-para-el-anuxe1lisis-exploratorio}{%
+\section{Cargar las librerías necesarias para el análisis
+exploratorio}\label{cargar-las-libreruxedas-necesarias-para-el-anuxe1lisis-exploratorio}}
+
+library(ggplot2) \# Para graficar library(dplyr) \# Para manipulación de
+datos library(summarytools) \# Para resúmenes descriptivos
+
+\hypertarget{cargar-los-datos-del-dataframe-vivienda4-si-auxfan-no-se-han-cargado}{%
+\section{Cargar los datos del dataframe ``vivienda4'' si aún no se han
+cargado}\label{cargar-los-datos-del-dataframe-vivienda4-si-auxfan-no-se-han-cargado}}
+
+if (!exists(``vivienda4'')) \{ data(vivienda4) \}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. Validar datos faltantes por variable}
+\NormalTok{missing\_data }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(vivienda4, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(x)))}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Datos faltantes por variable:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Datos faltantes por variable:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(missing\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      zona   estrato   preciom areaconst      tipo 
+##         0         0         0         0         0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. Validar si existen datos vacíos o null dentro de las variables del dataframe}
+\ControlFlowTok{if}\NormalTok{ (}\FunctionTok{any}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(vivienda4))) \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"El dataframe contiene valores nulos o vacíos.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 3. Cuantificar valores duplicados y eliminarlos}
+\NormalTok{duplicated\_count }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{duplicated}\NormalTok{(vivienda4))}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Número de filas duplicadas:"}\NormalTok{, duplicated\_count, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Número de filas duplicadas: 471
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Eliminar filas duplicadas}
+\NormalTok{vivienda4 }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(vivienda4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 4. Dejar el dataframe final sin outliers (valores atípicos)}
+\CommentTok{\# Puedes utilizar un criterio específico para definir outliers, por ejemplo, basado en desviaciones estándar}
+\CommentTok{\# Para este ejemplo, se eliminarán observaciones con valores de "preciom" que estén a más de 3 desviaciones estándar de la media.}
+
+\CommentTok{\# Calcular la media y desviación estándar de la variable "preciom"}
+\NormalTok{media\_preciom }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(vivienda4}\SpecialCharTok{$}\NormalTok{preciom)}
+\NormalTok{desviacion\_preciom }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(vivienda4}\SpecialCharTok{$}\NormalTok{preciom)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Crear un vector lógico unidimensional para filtrar los outliers}
+\NormalTok{condicion\_outliers }\OtherTok{\textless{}{-}} \FunctionTok{abs}\NormalTok{((vivienda4}\SpecialCharTok{$}\NormalTok{preciom }\SpecialCharTok{{-}}\NormalTok{ media\_preciom) }\SpecialCharTok{/}\NormalTok{ desviacion\_preciom) }\SpecialCharTok{\textless{}=} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vivienda4 }\OtherTok{\textless{}{-}}\NormalTok{ vivienda4 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(condicion\_outliers)}
+\FunctionTok{print}\NormalTok{(vivienda4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,218 x 5
+##    zona       estrato preciom areaconst tipo       
+##    <fct>      <fct>     <dbl>     <dbl> <fct>      
+##  1 Zona Norte 4           220        52 Apartamento
+##  2 Zona Norte 4           320       108 Apartamento
+##  3 Zona Sur   4           290        96 Apartamento
+##  4 Zona Norte 4           220        82 Apartamento
+##  5 Zona Norte 4           305       117 Casa       
+##  6 Zona Norte 4           220        75 Apartamento
+##  7 Zona Norte 4           162        60 Apartamento
+##  8 Zona Norte 4           225        84 Apartamento
+##  9 Zona Norte 4           370       117 Apartamento
+## 10 Zona Norte 4           350       118 Casa       
+## # i 1,208 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Resumen descriptivo de las variables "preciom" y "areaconst"}
+\NormalTok{desc\_vars }\OtherTok{\textless{}{-}} \FunctionTok{dfSummary}\NormalTok{(vivienda4[}\FunctionTok{c}\NormalTok{(}\StringTok{"preciom"}\NormalTok{, }\StringTok{"areaconst"}\NormalTok{)])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Gráfico de dispersión preciom vs areaconst}
+\FunctionTok{ggplot}\NormalTok{(vivienda4, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ areaconst, }\AttributeTok{y =}\NormalTok{ preciom)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{color =} \StringTok{"cyan"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Línea de tendencia}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Área Construida (metros cuadrados)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Precio (millones de pesos COP)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Gráfico de Dispersión Precio vs Área Construida con Línea de Tendencia"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Activdad_03_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Histograma del preciom}
+\FunctionTok{ggplot}\NormalTok{(vivienda4, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ preciom)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{, }\AttributeTok{fill =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Precio (millones de pesos COP)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Frecuencia"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Histograma del Precio de Vivienda"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Activdad_03_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Histograma del areaconst}
+\FunctionTok{ggplot}\NormalTok{(vivienda4, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ areaconst)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{10}\NormalTok{, }\AttributeTok{fill =} \StringTok{"green"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Área Construida (metros cuadrados)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Frecuencia"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Histograma del Área Construida de Vivienda"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Activdad_03_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Realice un análisis exploratorio bivariado de datos, enfocado en la
+  relación entre la variable respuesta (precio) en función de la
+  variable predictora (area construida) - incluir gráficos e indicadores
+  apropiados interpretados.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Gráfico de dispersión precio vs área construida con línea de tendencia central}
+\FunctionTok{ggplot}\NormalTok{(vivienda4, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ areaconst, }\AttributeTok{y =}\NormalTok{ preciom)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{color =} \StringTok{"cyan"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Línea de tendencia}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Área Construida (metros cuadrados)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Precio (millones de pesos COP)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Gráfico de Dispersión Precio vs Área Construida con Línea de Tendencia"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Activdad_03_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Gráfico de caja y bigotes para precio por estrato}
+\FunctionTok{ggplot}\NormalTok{(vivienda4, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{as.factor}\NormalTok{(estrato), }\AttributeTok{y =}\NormalTok{ preciom)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Estrato"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Precio (millones de pesos COP)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Gráfico de Caja y Bigotes de Precio por Estrato"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Activdad_03_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Resumen descriptivo de la relación entre precio y área construida}
+\NormalTok{summary\_precio\_area }\OtherTok{\textless{}{-}}\NormalTok{ vivienda4 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(preciom, areaconst)}
+\FunctionTok{summary}\NormalTok{(summary\_precio\_area)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     preciom        areaconst     
+##  Min.   : 78.0   Min.   : 40.00  
+##  1st Qu.:162.0   1st Qu.: 64.00  
+##  Median :220.0   Median : 80.00  
+##  Mean   :230.9   Mean   : 91.57  
+##  3rd Qu.:280.0   3rd Qu.:107.00  
+##  Max.   :500.0   Max.   :200.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(summary\_precio\_area)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,218 x 2
+##    preciom areaconst
+##      <dbl>     <dbl>
+##  1     220        52
+##  2     320       108
+##  3     290        96
+##  4     220        82
+##  5     305       117
+##  6     220        75
+##  7     162        60
+##  8     225        84
+##  9     370       117
+## 10     350       118
+## # i 1,208 more rows
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Estime el modelo de regresión lineal simple entre precio=f(area)+ε.
+  Interprete los coeficientes del modelo β0, β1 en caso de ser correcto.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Estimar el modelo de regresión lineal simple}
+\NormalTok{modelo\_regresion }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(preciom }\SpecialCharTok{\textasciitilde{}}\NormalTok{ areaconst, }\AttributeTok{data =}\NormalTok{ vivienda4)}
+
+\CommentTok{\# Mostrar un resumen del modelo}
+\FunctionTok{summary}\NormalTok{(modelo\_regresion)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = preciom ~ areaconst, data = vivienda4)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -180.856  -36.185   -8.411   32.584  218.580 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 83.83857    4.12495   20.32   <2e-16 ***
+## areaconst    1.60636    0.04176   38.47   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 54.01 on 1216 degrees of freedom
+## Multiple R-squared:  0.549,  Adjusted R-squared:  0.5486 
+## F-statistic:  1480 on 1 and 1216 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Modelo de Regresión Lineal Simple entre Precio de Vivienda y Área
+  Construida
+\end{enumerate}
+
+El presente análisis se centra en la relación entre el precio de las
+viviendas (expresado en millones de pesos COP) y el área construida de
+las mismas (en metros cuadrados). Para abordar esta relación, se ha
+estimado un modelo de regresión lineal simple, donde el precio se
+considera la variable de respuesta (preciom) y el área construida actúa
+como variable predictora (areaconst).
+
+Intercepto (β0) y Pendiente (β1):
+
+El coeficiente del intercepto (β0) en el modelo de regresión lineal
+simple es de 83.83857 millones de pesos COP. Sin embargo, su
+interpretación en este contexto puede carecer de significado práctico,
+ya que se refiere al precio estimado cuando el área construida es igual
+a cero, lo cual no tiene una interpretación realista en el contexto de
+bienes raíces. El coeficiente de la variable ``areaconst'' (β1) es de
+1.60636. Esto significa que, por cada metro cuadrado adicional de área
+construida, se espera un incremento promedio en el precio de 1.60636
+millones de pesos COP. En otras palabras, el precio promedio de una
+vivienda aumenta en aproximadamente 1.61 millones de pesos COP por cada
+metro cuadrado adicional de área construida. Estadísticas Adicionales:
+
+La mediana de los residuales es -8.411 millones de pesos COP, lo que
+sugiere que, en promedio, las predicciones del modelo tienden a
+subestimar el precio observado en 8.411 millones de pesos COP. El error
+estándar residual es de 54.01 millones de pesos COP, lo que representa
+la variabilidad no explicada por el modelo y refleja la dispersión de
+los valores alrededor de la línea de regresión. El valor de R-cuadrado
+múltiple es de 0.549, lo que indica que aproximadamente el 54.9\% de la
+variabilidad en el precio se explica mediante la relación lineal con el
+área construida. El R-cuadrado ajustado es de 0.5486, lo que sugiere que
+el modelo es robusto y no se vería significativamente afectado al
+simplificarlo. La estadística F es de 1480 con un p-valor extremadamente
+bajo, lo que confirma la significatividad global del modelo de
+regresión. En conclusión, el modelo de regresión lineal simple
+proporciona evidencia de que existe una relación estadísticamente
+significativa entre el precio de las viviendas y el área construida. El
+incremento promedio en el precio por cada metro cuadrado adicional de
+área construida es de aproximadamente 1.61 millones de pesos COP.
+Aproximadamente el 54.9\% de la variabilidad en el precio se explica
+mediante esta relación lineal. Estos resultados son fundamentales para
+comprender cómo el área construida influye en el precio de las viviendas
+y pueden ser útiles en la toma de decisiones en el mercado inmobiliario.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Construir un intervalo de confianza (95\%) para el coeficiente β1,
+  interpretar y concluir si el coeficiente es igual a cero o no. Compare
+  este resultado con una prueba de hipótesis t.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Obtener el valor crítico de la distribución t}
+\NormalTok{grados\_libertad }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(vivienda4}\SpecialCharTok{$}\NormalTok{areaconst) }\SpecialCharTok{{-}} \DecValTok{2}
+\NormalTok{t\_critico }\OtherTok{\textless{}{-}} \FunctionTok{qt}\NormalTok{(}\FloatTok{0.975}\NormalTok{, }\AttributeTok{df =}\NormalTok{ grados\_libertad)  }\CommentTok{\# Para un intervalo de confianza del 95\%}
+
+\CommentTok{\# Calcular el intervalo de confianza para β1}
+\NormalTok{coef\_beta1 }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(modelo\_regresion)[}\DecValTok{2}\NormalTok{]  }\CommentTok{\# Coeficiente β1}
+\NormalTok{se\_beta1 }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(modelo\_regresion)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{, }\StringTok{"Std. Error"}\NormalTok{]  }\CommentTok{\# Error estándar de β1}
+
+\NormalTok{limite\_inferior }\OtherTok{\textless{}{-}}\NormalTok{ coef\_beta1 }\SpecialCharTok{{-}}\NormalTok{ t\_critico }\SpecialCharTok{*}\NormalTok{ se\_beta1}
+\NormalTok{limite\_superior }\OtherTok{\textless{}{-}}\NormalTok{ coef\_beta1 }\SpecialCharTok{+}\NormalTok{ t\_critico }\SpecialCharTok{*}\NormalTok{ se\_beta1}
+
+\CommentTok{\# Mostrar el intervalo de confianza}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Intervalo de Confianza (95\%) para β1: ["}\NormalTok{, limite\_inferior, }\StringTok{", "}\NormalTok{, limite\_superior, }\StringTok{"]}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Intervalo de Confianza (95%) para β1: [ 1.524437 ,  1.688277 ]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Realizar la prueba de hipótesis t}
+\NormalTok{t\_stat }\OtherTok{\textless{}{-}}\NormalTok{ coef\_beta1 }\SpecialCharTok{/}\NormalTok{ se\_beta1}
+\NormalTok{grados\_libertad }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(vivienda4}\SpecialCharTok{$}\NormalTok{areaconst) }\SpecialCharTok{{-}} \DecValTok{2}
+\NormalTok{p\_valor }\OtherTok{\textless{}{-}} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{pt}\NormalTok{(}\FunctionTok{abs}\NormalTok{(t\_stat), }\AttributeTok{df =}\NormalTok{ grados\_libertad))}
+
+\CommentTok{\# Mostrar el estadístico t y el p{-}valor}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Estadístico t para β1:"}\NormalTok{, t\_stat, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Estadístico t para β1: 38.47082
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"P{-}valor de la prueba de hipótesis t:"}\NormalTok{, p\_valor, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## P-valor de la prueba de hipótesis t: 0
+\end{verbatim}
+
+Intervalo de Confianza (95\%) para β1:
+
+Se ha construido un intervalo de confianza del 95\% para el coeficiente
+β1 en el modelo de regresión. El intervalo de confianza se encuentra
+entre 1.524437 y 1.688277.
+
+Interpretación: Esto significa que con un nivel de confianza del 95\%,
+podemos afirmar que el coeficiente β1 está contenido en este intervalo.
+En otras palabras, es probable que el aumento promedio en el precio de
+una vivienda por cada metro cuadrado adicional de área construida esté
+entre 1.524437 y 1.688277 millones de pesos COP. El hecho de que el
+intervalo no incluya el valor cero sugiere que el coeficiente β1 no es
+igual a cero y que existe una relación significativa entre el precio y
+el área construida.
+
+Prueba de Hipótesis t:
+
+Se ha realizado una prueba de hipótesis t para evaluar si el coeficiente
+β1 es igual a cero (hipótesis nula) o no (hipótesis alternativa).
+
+Estadístico t para β1: El estadístico t es 38.47082. P-valor de la
+prueba de hipótesis t: El p-valor es 0. Interpretación: El p-valor de la
+prueba de hipótesis t es extremadamente bajo, prácticamente igual a
+cero. Esto significa que podemos rechazar la hipótesis nula (H0) que
+sugiere que el coeficiente β1 es igual a cero. En cambio, concluimos que
+el coeficiente β1 es significativamente diferente de cero. En otras
+palabras, hay evidencia estadística sólida de que existe una relación
+significativa entre el precio de las viviendas y el área construida.
+
+En resumen, tanto el intervalo de confianza como la prueba de hipótesis
+t respaldan la conclusión de que el coeficiente β1 no es igual a cero,
+lo que indica que el área construida tiene un impacto significativo en
+el precio de las viviendas. Estos resultados son fundamentales para
+comprender y modelar la relación entre estas dos variables en el
+contexto del mercado inmobiliario.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Gráfico del intervalo de confianza para β1}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# Datos del intervalo de confianza}
+\NormalTok{intervalo\_confianza }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Intervalo =} \FunctionTok{c}\NormalTok{(}\StringTok{"IC 95\% para β1"}\NormalTok{), }
+                                  \AttributeTok{Limite\_Inferior =}\NormalTok{ limite\_inferior, }
+                                  \AttributeTok{Limite\_Superior =}\NormalTok{ limite\_superior,}
+                                  \AttributeTok{Estimado =}\NormalTok{ coef\_beta1)}
+
+\CommentTok{\# Crear el gráfico}
+\FunctionTok{ggplot}\NormalTok{(intervalo\_confianza, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Intervalo, }\AttributeTok{y =}\NormalTok{ Estimado)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ Limite\_Inferior, }\AttributeTok{ymax =}\NormalTok{ Limite\_Superior), }\AttributeTok{width =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{, }\AttributeTok{y =} \StringTok{"Coeficiente β1"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Intervalo de Confianza (95\%) para β1"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Activdad_03_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Calcule e interprete el indicador de bondad R2.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calcular R² (Coeficiente de Determinación)}
+\NormalTok{R\_cuadrado }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(modelo\_regresion)}\SpecialCharTok{$}\NormalTok{r.squared}
+
+\CommentTok{\# Mostrar el valor de R²}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Coeficiente de Determinación (R²):"}\NormalTok{, R\_cuadrado, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Coeficiente de Determinación (R²): 0.548962
+\end{verbatim}
+
+Coeficiente de Determinación (R²) en el Modelo de Regresión
+
+El coeficiente de determinación (R²) es un indicador fundamental en
+análisis de regresión que mide la proporción de la variabilidad en la
+variable de respuesta (en este caso, el precio de las viviendas) que
+puede ser explicada por el modelo de regresión lineal simple con el área
+construida como variable predictora.
+
+En el presente análisis, el valor de R² es igual a 0.548962, lo que
+significa que aproximadamente el 54.9\% de la variabilidad en los
+precios de las viviendas se encuentra explicada por la relación lineal
+con el área construida. En otras palabras, más de la mitad de la
+variación en los precios de las viviendas puede ser atribuida al tamaño
+del área construida de las mismas según el modelo.
+
+¿Cuál sería el precio promedio estimado para un apartamento de 110
+metros cuadrados? Considera entonces con este resultado que un
+apartamento en la misma zona con 110 metros cuadrados en un precio de
+200 millones sería una atractiva esta oferta? ¿Qué consideraciones
+adicionales se deben tener?.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Definir el valor de área construida}
+\NormalTok{area\_construida\_estimada }\OtherTok{\textless{}{-}} \DecValTok{110}  \CommentTok{\# Metros cuadrados}
+
+\CommentTok{\# Calcular el precio estimado utilizando el modelo de regresión}
+\NormalTok{precio\_estimado }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(modelo\_regresion)[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+} \FunctionTok{coef}\NormalTok{(modelo\_regresion)[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{*}\NormalTok{ area\_construida\_estimada}
+
+\CommentTok{\# Mostrar el precio estimado}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Precio estimado para un apartamento de 110 metros cuadrados:"}\NormalTok{, precio\_estimado, }\StringTok{"millones de pesos COP}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Precio estimado para un apartamento de 110 metros cuadrados: 260.5378 millones de pesos COP
+\end{verbatim}
+
+Precio Estimado para un Apartamento de 110 Metros Cuadrados
+
+Utilizando el modelo de regresión lineal simple, hemos calculado el
+precio estimado para un apartamento de 110 metros cuadrados en la misma
+zona de interés. El precio estimado es de 260.5378 millones de pesos
+COP.
+
+Ahora, considerando este resultado, podemos evaluar si una oferta de un
+apartamento en la misma zona con 110 metros cuadrados a un precio de 200
+millones de pesos sería atractiva:
+
+Comparación de Precios: El precio estimado es significativamente mayor
+que el precio de la oferta, ya que el precio estimado es de 260.5378
+millones de pesos COP, mientras que el precio de la oferta es de 200
+millones de pesos COP. Esto indica que el precio de la oferta es
+considerablemente inferior al precio estimado.
+
+Atractivo de la Oferta: Desde una perspectiva puramente basada en el
+precio, la oferta de un apartamento de 110 metros cuadrados a un precio
+de 200 millones de pesos podría considerarse atractiva, ya que está por
+debajo del precio estimado.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Precio de la oferta y precio estimado}
+\NormalTok{precio\_oferta }\OtherTok{\textless{}{-}} \DecValTok{200}  \CommentTok{\# Precio de la oferta en millones de pesos COP}
+\NormalTok{precio\_estimado }\OtherTok{\textless{}{-}} \FloatTok{260.5378}  \CommentTok{\# Precio estimado en millones de pesos COP}
+
+\CommentTok{\# Crear un dataframe para el gráfico}
+\NormalTok{data\_grafico }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Variable =} \FunctionTok{c}\NormalTok{(}\StringTok{"Precio de la Oferta"}\NormalTok{, }\StringTok{"Precio Estimado"}\NormalTok{),}
+                           \AttributeTok{Precio =} \FunctionTok{c}\NormalTok{(precio\_oferta, precio\_estimado))}
+
+\CommentTok{\# Crear el gráfico de barras}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{ggplot}\NormalTok{(data\_grafico, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Variable, }\AttributeTok{y =}\NormalTok{ Precio, }\AttributeTok{fill =}\NormalTok{ Variable)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Precio (millones de pesos COP)"}\NormalTok{, }\AttributeTok{title =} \StringTok{"Comparación de Precio de Oferta y Precio Estimado"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Precio de la Oferta"} \OtherTok{=} \StringTok{"red"}\NormalTok{, }\StringTok{"Precio Estimado"} \OtherTok{=} \StringTok{"blue"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Activdad_03_files/figure-latex/unnamed-chunk-24-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Realice la validación de los supuestos del modelo por medio de
+  gráficos apropiados, interpretarlos y sugerir posibles soluciones si
+  se violan algunos de ellos. Utilice las pruebas de hipótesis para la
+  validación de supuestos y compare los resultados con lo observado en
+  los gráficos asociados.
+\end{enumerate}
+
+Supuesto de Linealidad: Para verificar el supuesto de linealidad y la
+autocorrelación de los residuales:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Gráfico de Residuales vs. Valores Ajustados}
+\FunctionTok{plot}\NormalTok{(modelo\_regresion, }\AttributeTok{which =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Activdad_03_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Prueba de Durbin{-}Watson}
+\FunctionTok{library}\NormalTok{(car)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: carData
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'car'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     recode
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     some
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:psych':
+## 
+##     logit
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{durbinWatsonTest}\NormalTok{(modelo\_regresion)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  lag Autocorrelation D-W Statistic p-value
+##    1       0.1773652      1.642903       0
+##  Alternative hypothesis: rho != 0
+\end{verbatim}
+
+Gráfico de Residuales vs.~Valores Ajustados: El gráfico muestra la
+dispersión de los residuales en función de los valores ajustados. Se
+busca una distribución aleatoria y uniforme de los puntos alrededor de
+la línea horizontal. En este caso, se observa cierta tendencia en los
+residuales a medida que los valores ajustados aumentan, lo que indica
+una posible violación del supuesto de linealidad.
+
+Prueba de Durbin-Watson: La prueba de Durbin-Watson evalúa la
+autocorrelación de los residuales. El estadístico D-W es 1.642903, y el
+valor p es cero. Un valor de D-W significativamente diferente de 2 (el
+valor ideal) sugiere autocorrelación. En este caso, D-W es menor que 2,
+lo que indica la presencia de autocorrelación positiva entre los
+residuales. Esto sugiere una posible violación del supuesto de
+independencia, lo que podría requerir una corrección.
+
+Supuesto de Homocedasticidad: Para verificar el supuesto de
+homocedasticidad:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Gráfico de Residuales vs. Orden}
+\FunctionTok{plot}\NormalTok{(modelo\_regresion, }\AttributeTok{which =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Activdad_03_files/figure-latex/unnamed-chunk-26-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Prueba de Ljung{-}Box}
+\FunctionTok{library}\NormalTok{(astsa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'astsa'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:psych':
+## 
+##     scatter.hist
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Box.test}\NormalTok{(}\FunctionTok{resid}\NormalTok{(modelo\_regresion), }\AttributeTok{lag =} \DecValTok{20}\NormalTok{, }\AttributeTok{type =} \StringTok{"Ljung"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Box-Ljung test
+## 
+## data:  resid(modelo_regresion)
+## X-squared = 139.85, df = 20, p-value < 2.2e-16
+\end{verbatim}
+
+Gráfico de Residuales vs.~Orden: Este gráfico muestra los residuales en
+función de su orden o secuencia en los datos. El supuesto de
+homocedasticidad se relaciona con la dispersión constante de los
+residuales a lo largo del tiempo. En este caso, no se observa una clara
+estructura en forma de embudo o cono en el gráfico, lo que sugiere que
+la homocedasticidad es razonable.
+
+Prueba de Ljung-Box: La prueba de Ljung-Box se utiliza para evaluar la
+autocorrelación de los residuales a través de varios retrasos. El valor
+de X-squared es 139.85, con un p-valor muy bajo (prácticamente cero).
+Esto indica la presencia de autocorrelación entre los residuales en
+diferentes retrasos. La significatividad de esta prueba respalda la
+presencia de autocorrelación positiva en los residuales y sugiere una
+violación del supuesto de independencia.
+
+Supuesto de Normalidad de los Residuales: Para verificar el supuesto de
+normalidad de los residuales:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Gráfico Q{-}Q}
+\FunctionTok{qqnorm}\NormalTok{(}\FunctionTok{resid}\NormalTok{(modelo\_regresion))}
+\FunctionTok{qqline}\NormalTok{(}\FunctionTok{resid}\NormalTok{(modelo\_regresion))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Activdad_03_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Prueba de Shapiro{-}Wilk}
+\FunctionTok{shapiro.test}\NormalTok{(}\FunctionTok{resid}\NormalTok{(modelo\_regresion))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  resid(modelo_regresion)
+## W = 0.97692, p-value = 4.908e-13
+\end{verbatim}
+
+Gráfico Q-Q: El gráfico Q-Q compara la distribución de los residuales
+con una distribución normal. Idealmente, los puntos se alinearían en una
+línea diagonal. En este caso, se observa cierta desviación de la línea
+diagonal en los extremos del gráfico, lo que sugiere una posible
+desviación de la normalidad.
+
+Prueba de Shapiro-Wilk: La prueba de Shapiro-Wilk evalúa si los
+residuales siguen una distribución normal. El valor de W es 0.97692, y
+el p-valor es 4.908e-13, lo que es extremadamente bajo. Un p-valor bajo
+indica que los residuales no siguen una distribución normal. En este
+caso, la prueba rechaza la hipótesis de normalidad, sugiriendo una
+violación del supuesto.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  De ser necesario realice una transformación apropiada para mejorar el
+  ajuste y supuestos del modelo.
+\end{enumerate}
+
+Transformación Logarítmica: La transformación logarítmica se utiliza
+cuando se sospecha una relación no lineal entre las variables. Puede ser
+útil cuando los datos originales tienen una dispersión creciente en
+relación con el valor ajustado. Puede aplicarse a la variable de
+respuesta, la variable predictora o ambas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Aplicar transformación logarítmica a la variable de respuesta}
+\NormalTok{vivienda4}\SpecialCharTok{$}\NormalTok{preciom }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(vivienda4}\SpecialCharTok{$}\NormalTok{preciom)}
+
+\CommentTok{\# Volver a estimar el modelo con la variable transformada}
+\NormalTok{modelo\_regresion\_log }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(preciom }\SpecialCharTok{\textasciitilde{}}\NormalTok{ areaconst, }\AttributeTok{data =}\NormalTok{ vivienda4)}
+
+\CommentTok{\# Mostrar el resumen del nuevo modelo}
+\FunctionTok{summary}\NormalTok{(modelo\_regresion\_log)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = preciom ~ areaconst, data = vivienda4)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.78056 -0.17042 -0.00987  0.17444  0.73441 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 4.771009   0.017982  265.31   <2e-16 ***
+## areaconst   0.006690   0.000182   36.75   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2354 on 1216 degrees of freedom
+## Multiple R-squared:  0.5262, Adjusted R-squared:  0.5259 
+## F-statistic:  1351 on 1 and 1216 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+Se aplicó una transformación logarítmica a la variable de respuesta
+``preciom'' para abordar posibles problemas de no linealidad en la
+relación.
+
+En el nuevo modelo, el coeficiente de la variable predictora
+``areaconst'' es 0.006690, lo que significa que un incremento de una
+unidad en ``areaconst'' se asocia con un aumento del 0.006690 en el
+logaritmo de ``preciom.''
+
+El valor de R cuadrado ajustado es 0.5259, lo que sugiere que el modelo
+explica el 52.59\% de la variabilidad en los datos transformados.
+
+El p-valor del F-statistic es prácticamente cero, lo que indica que el
+modelo es significativo.
+
+Transformación Raíz Cuadrada: La raíz cuadrada es otra transformación
+útil para abordar problemas de no linealidad. Puede ayudar a estabilizar
+la varianza y linealizar la relación entre las variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Aplicar transformación de raíz cuadrada a la variable de respuesta}
+\NormalTok{vivienda4}\SpecialCharTok{$}\NormalTok{preciom\_sqrt }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(vivienda4}\SpecialCharTok{$}\NormalTok{preciom)}
+
+\CommentTok{\# Volver a estimar el modelo con la variable transformada}
+\NormalTok{modelo\_regresion\_sqrt }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(preciom\_sqrt }\SpecialCharTok{\textasciitilde{}}\NormalTok{ areaconst, }\AttributeTok{data =}\NormalTok{ vivienda4)}
+
+\CommentTok{\# Mostrar el resumen del nuevo modelo}
+\FunctionTok{summary}\NormalTok{(modelo\_regresion\_sqrt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = preciom_sqrt ~ areaconst, data = vivienda4)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.172394 -0.036886 -0.001683  0.038376  0.156571 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 2.1876154  0.0038928  561.97   <2e-16 ***
+## areaconst   0.0014358  0.0000394   36.44   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.05097 on 1216 degrees of freedom
+## Multiple R-squared:  0.5219, Adjusted R-squared:  0.5216 
+## F-statistic:  1328 on 1 and 1216 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+Se aplicó una transformación de raíz cuadrada a la variable de respuesta
+``preciom'' para abordar problemas de no linealidad y estabilizar la
+varianza.
+
+Se aplicó una transformación de raíz cuadrada a la variable de respuesta
+``preciom'' para abordar problemas de no linealidad y estabilizar la
+varianza.
+
+El valor de R cuadrado ajustado es 0.5216, lo que sugiere que el modelo
+explica el 52.16\% de la variabilidad en los datos transformados.
+
+El p-valor del F-statistic es prácticamente cero, lo que indica que el
+modelo es significativo.
+
+Transformación Box-Cox: La transformación de Box-Cox es una técnica más
+general que puede ayudar a identificar la mejor transformación posible.
+Puede utilizarse para buscar la potencia óptima que linealiza la
+relación entre las variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calcular la transformación de Box{-}Cox para la variable de respuesta}
+\FunctionTok{library}\NormalTok{(MASS)}
+\NormalTok{boxcox\_lambda }\OtherTok{\textless{}{-}} \FunctionTok{boxcox}\NormalTok{(modelo\_regresion)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Activdad_03_files/figure-latex/unnamed-chunk-30-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Aplicar la transformación de Box{-}Cox a la variable de respuesta con el lambda óptimo}
+\NormalTok{lambda\_optimo }\OtherTok{\textless{}{-}}\NormalTok{ boxcox\_lambda}\SpecialCharTok{$}\NormalTok{x[}\FunctionTok{which.max}\NormalTok{(boxcox\_lambda}\SpecialCharTok{$}\NormalTok{y)]}
+\NormalTok{vivienda4}\SpecialCharTok{$}\NormalTok{preciom\_boxcox }\OtherTok{\textless{}{-}}\NormalTok{ (vivienda4}\SpecialCharTok{$}\NormalTok{preciom}\SpecialCharTok{\^{}}\NormalTok{lambda\_optimo }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ lambda\_optimo}
+
+\CommentTok{\# Volver a estimar el modelo con la variable transformada}
+\NormalTok{modelo\_regresion\_boxcox }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(preciom\_boxcox }\SpecialCharTok{\textasciitilde{}}\NormalTok{ areaconst, }\AttributeTok{data =}\NormalTok{ vivienda4)}
+
+\CommentTok{\# Mostrar el resumen del nuevo modelo}
+\FunctionTok{summary}\NormalTok{(modelo\_regresion\_boxcox)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = preciom_boxcox ~ areaconst, data = vivienda4)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.1614 -0.9292 -0.0726  0.9116  4.0471 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 1.072e+01  9.634e-02  111.25   <2e-16 ***
+## areaconst   3.639e-02  9.752e-04   37.31   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.261 on 1216 degrees of freedom
+## Multiple R-squared:  0.5338, Adjusted R-squared:  0.5334 
+## F-statistic:  1392 on 1 and 1216 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+Se aplicó la transformación de Box-Cox para identificar la mejor
+transformación posible. El lambda óptimo se determinó como 0.1141.
+
+En el nuevo modelo, el coeficiente de la variable predictora
+``areaconst'' es 0.03639, lo que significa que un incremento de una
+unidad en ``areaconst'' se asocia con un aumento de 0.03639 en la
+variable de respuesta transformada por Box-Cox.
+
+El valor de R cuadrado ajustado es 0.5334, lo que sugiere que el modelo
+explica el 53.34\% de la variabilidad en los datos transformados.
+
+El p-valor del F-statistic es prácticamente cero, lo que indica que el
+modelo es significativo.
+
+De ser necesario compare el ajuste y supuestos del modelo inicial y el
+transformado.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Cargar las librerías necesarias}
+\FunctionTok{library}\NormalTok{(car)}
+\FunctionTok{library}\NormalTok{(broom)}
+
+\CommentTok{\# Ajustar el modelo de regresión lineal inicial}
+\NormalTok{modelo\_regresion\_inicial }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(preciom }\SpecialCharTok{\textasciitilde{}}\NormalTok{ areaconst, }\AttributeTok{data =}\NormalTok{ vivienda4)}
+
+\CommentTok{\# Calcular el intervalo de confianza del 95\% para el coeficiente β1}
+\NormalTok{conf\_int\_inicial }\OtherTok{\textless{}{-}} \FunctionTok{confint}\NormalTok{(modelo\_regresion\_inicial)}
+
+\CommentTok{\# Realizar el diagnóstico del modelo inicial}
+\NormalTok{modelo\_regresion\_inicial\_diagnostic }\OtherTok{\textless{}{-}} \FunctionTok{influence.measures}\NormalTok{(modelo\_regresion\_inicial)}
+
+\CommentTok{\# Ajustar un modelo de regresión lineal con la variable de respuesta transformada}
+\NormalTok{modelo\_regresion\_transformado }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{sqrt}\NormalTok{(preciom) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ areaconst, }\AttributeTok{data =}\NormalTok{ vivienda4)}
+
+\CommentTok{\# Calcular el intervalo de confianza del 95\% para el coeficiente β1 en el modelo transformado}
+\NormalTok{conf\_int\_transformado }\OtherTok{\textless{}{-}} \FunctionTok{confint}\NormalTok{(modelo\_regresion\_transformado)}
+
+\CommentTok{\# Realizar el diagnóstico del modelo transformado}
+\NormalTok{modelo\_regresion\_transformado\_diagnostic }\OtherTok{\textless{}{-}} \FunctionTok{influence.measures}\NormalTok{(modelo\_regresion\_transformado)}
+
+\CommentTok{\# Resumen de los modelos iniciales}
+\FunctionTok{summary}\NormalTok{(modelo\_regresion\_inicial)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = preciom ~ areaconst, data = vivienda4)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.78056 -0.17042 -0.00987  0.17444  0.73441 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 4.771009   0.017982  265.31   <2e-16 ***
+## areaconst   0.006690   0.000182   36.75   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2354 on 1216 degrees of freedom
+## Multiple R-squared:  0.5262, Adjusted R-squared:  0.5259 
+## F-statistic:  1351 on 1 and 1216 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Resumen de los modelos transformados}
+\FunctionTok{summary}\NormalTok{(modelo\_regresion\_transformado)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = sqrt(preciom) ~ areaconst, data = vivienda4)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.172394 -0.036886 -0.001683  0.038376  0.156571 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 2.1876154  0.0038928  561.97   <2e-16 ***
+## areaconst   0.0014358  0.0000394   36.44   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.05097 on 1216 degrees of freedom
+## Multiple R-squared:  0.5219, Adjusted R-squared:  0.5216 
+## F-statistic:  1328 on 1 and 1216 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Comparar los intervalos de confianza de β1}
+\NormalTok{conf\_int\_inicial}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   2.5 %      97.5 %
+## (Intercept) 4.735729167 4.806289560
+## areaconst   0.006332826 0.007047081
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{conf\_int\_transformado}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   2.5 %      97.5 %
+## (Intercept) 2.179978075 2.195252625
+## areaconst   0.001358485 0.001513103
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Comparar los diagnósticos de los modelos}
+\FunctionTok{anova}\NormalTok{(modelo\_regresion\_inicial, modelo\_regresion\_transformado)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in anova.lmlist(object, ...): models with response '"sqrt(preciom)"'
+## removed because response differs from model 1
+\end{verbatim}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: preciom
+##             Df Sum Sq Mean Sq F value    Pr(>F)    
+## areaconst    1 74.878  74.878  1350.7 < 2.2e-16 ***
+## Residuals 1216 67.411   0.055                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+La
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Resumen de los Modelos Iniciales y Transformados:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Modelo Inicial:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      El modelo inicial utiliza la variable de respuesta
+      \texttt{preciom}.
+    \item
+      Coeficiente para el intercepto (β0): 4.771009 con un error
+      estándar de 0.017982.
+    \item
+      Coeficiente para \texttt{areaconst} (β1): 0.006690 con un error
+      estándar de 0.000182.
+    \item
+      El R-cuadrado ajustado es 0.5259, lo que significa que el modelo
+      explica aproximadamente el 52.59\% de la variabilidad en la
+      variable de respuesta.
+    \end{itemize}
+  \item
+    Modelo Transformado:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      El modelo transformado utiliza la raíz cuadrada de la variable de
+      respuesta, \texttt{sqrt(preciom)}.
+    \item
+      Coeficiente para el intercepto (β0): 2.1876154 con un error
+      estándar de 0.0038928.
+    \item
+      Coeficiente para \texttt{areaconst} (β1): 0.0014358 con un error
+      estándar de 0.0000394.
+    \item
+      El R-cuadrado ajustado es 0.5216, lo que significa que el modelo
+      transformado explica aproximadamente el 52.16\% de la variabilidad
+      en la raíz cuadrada de la variable de respuesta.
+    \end{itemize}
+  \end{itemize}
+\item
+  Comparación de los Intervalos de Confianza de β1:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Para el modelo inicial, el intervalo de confianza del 95\% para el
+    coeficiente de \texttt{areaconst} (β1) va desde 0.006332826 a
+    0.007047081.
+  \item
+    Para el modelo transformado, el intervalo de confianza del 95\% para
+    el coeficiente de \texttt{areaconst} (β1) va desde 0.001358485 a
+    0.001513103.
+  \end{itemize}
+\item
+  Comparación de los Diagnósticos de los Modelos:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    El análisis de varianza (ANOVA) muestra que el modelo inicial y el
+    modelo transformado son significativos (p-valor muy bajo), lo que
+    significa que ambos modelos son adecuados para explicar la
+    variabilidad en la variable de respuesta.
+  \end{itemize}
+\end{enumerate}
+
+En general, la comparación de los modelos inicial y transformado sugiere
+que ambos modelos son estadísticamente significativos, y los intervalos
+de confianza para el coeficiente \texttt{areaconst} son diferentes
+debido a la transformación de la variable de respuesta. Sin embargo, el
+impacto de la transformación en la calidad del ajuste no es
+significativo, ya que los valores de R-cuadrado ajustado son bastante
+similares en ambos modelos. La elección entre el modelo inicial y el
+modelo transformado dependerá de los objetivos del análisis y la
+interpretación de los coeficientes.
+
+\end{document}

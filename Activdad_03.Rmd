@@ -34,7 +34,7 @@ data(vivienda4)
 
 
 
-<h2>Realice un análisis exploratorio de las variables precio de vivienda (millones de pesos COP) y área de la vivienda (metros cuadrados) - incluir gráficos e indicadores apropiados interpretados.</h2>
+<h2>1. Realice un análisis exploratorio de las variables precio de vivienda (millones de pesos COP) y área de la vivienda (metros cuadrados) - incluir gráficos e indicadores apropiados interpretados.</h2>
 
 ```{r}
 data(vivienda4)
@@ -142,7 +142,7 @@ ggplot(vivienda4, aes(x = areaconst)) +
   ggtitle("Histograma del Área Construida de Vivienda")
 ```
 
-<h2>Realice un análisis exploratorio bivariado de datos, enfocado en la relación entre la variable respuesta (precio) en función de la variable predictora (area construida) - incluir gráficos e indicadores apropiados interpretados.</h2>
+<h2>2. Realice un análisis exploratorio bivariado de datos, enfocado en la relación entre la variable respuesta (precio) en función de la variable predictora (area construida) - incluir gráficos e indicadores apropiados interpretados.</h2>
 
 
 ```{r}
@@ -179,7 +179,7 @@ print(summary_precio_area)
 ```
 
 
-<h2>Estime el modelo de regresión lineal simple entre precio=f(area)+ε. Interprete los coeficientes del modelo β0, β1 en caso de ser correcto.</h2>
+<h2>3. Estime el modelo de regresión lineal simple entre precio=f(area)+ε. Interprete los coeficientes del modelo β0, β1 en caso de ser correcto.</h2>
 
 
 ```{r}
@@ -191,7 +191,7 @@ summary(modelo_regresion)
 
 ```
 
-<p>Modelo de Regresión Lineal Simple entre Precio de Vivienda y Área Construida
+<p>4. Modelo de Regresión Lineal Simple entre Precio de Vivienda y Área Construida
 
 El presente análisis se centra en la relación entre el precio de las viviendas (expresado en millones de pesos COP) y el área construida de las mismas (en metros cuadrados). Para abordar esta relación, se ha estimado un modelo de regresión lineal simple, donde el precio se considera la variable de respuesta (preciom) y el área construida actúa como variable predictora (areaconst).
 
@@ -213,7 +213,7 @@ En conclusión, el modelo de regresión lineal simple proporciona evidencia de q
 ```
 
 
-<h2>Construir un intervalo de confianza (95%) para el coeficiente β1, interpretar y concluir si el coeficiente es igual a cero o no. Compare este resultado con una prueba de hipótesis t.</h2>
+<h2>5. Construir un intervalo de confianza (95%) para el coeficiente β1, interpretar y concluir si el coeficiente es igual a cero o no. Compare este resultado con una prueba de hipótesis t.</h2>
 
 
 ```{r}
@@ -288,7 +288,7 @@ ggplot(intervalo_confianza, aes(x = Intervalo, y = Estimado)) +
 ```
 
 
-<h2>Calcule e interprete el indicador de bondad R2.</h2>
+<h2>6. Calcule e interprete el indicador de bondad R2.</h2>
 
 
 ```{r}
@@ -359,7 +359,7 @@ ggplot(data_grafico, aes(x = Variable, y = Precio, fill = Variable)) +
 ```
 
 
-<h2>Realice la validación de los supuestos del modelo por medio de gráficos apropiados, interpretarlos y sugerir posibles soluciones si se violan algunos de ellos. Utilice las pruebas de hipótesis para la validación de supuestos y compare los resultados con lo observado en los gráficos asociados.</h2>
+<h2>7. Realice la validación de los supuestos del modelo por medio de gráficos apropiados, interpretarlos y sugerir posibles soluciones si se violan algunos de ellos. Utilice las pruebas de hipótesis para la validación de supuestos y compare los resultados con lo observado en los gráficos asociados.</h2>
 
 
 
@@ -426,29 +426,139 @@ Gráfico Q-Q: El gráfico Q-Q compara la distribución de los residuales con una
 Prueba de Shapiro-Wilk: La prueba de Shapiro-Wilk evalúa si los residuales siguen una distribución normal. El valor de W es 0.97692, y el p-valor es 4.908e-13, lo que es extremadamente bajo. Un p-valor bajo indica que los residuales no siguen una distribución normal. En este caso, la prueba rechaza la hipótesis de normalidad, sugiriendo una violación del supuesto.
 </p>
 
-<h2>De ser necesario realice una transformación apropiada para mejorar el ajuste y supuestos del modelo.</h2>
+<h2>8. De ser necesario realice una transformación apropiada para mejorar el ajuste y supuestos del modelo.</h2>
 
 
+
+<b>Transformación Logarítmica:</b> La transformación logarítmica se utiliza cuando se sospecha una relación no lineal entre las variables. Puede ser útil cuando los datos originales tienen una dispersión creciente en relación con el valor ajustado. Puede aplicarse a la variable de respuesta, la variable predictora o ambas.
 ```{r}
+
+# Aplicar transformación logarítmica a la variable de respuesta
+vivienda4$preciom <- log(vivienda4$preciom)
+
+# Volver a estimar el modelo con la variable transformada
+modelo_regresion_log <- lm(preciom ~ areaconst, data = vivienda4)
+
+# Mostrar el resumen del nuevo modelo
+summary(modelo_regresion_log)
+
 
 ```
 
+<li><ul>Se aplicó una transformación logarítmica a la variable de respuesta "preciom" para abordar posibles problemas de no linealidad en la relación.</li></ul>
+<li><ul>En el nuevo modelo, el coeficiente de la variable predictora "areaconst" es 0.006690, lo que significa que un incremento de una unidad en "areaconst" se asocia con un aumento del 0.006690 en el logaritmo de "preciom."</li></ul>
+<li><ul>El valor de R cuadrado ajustado es 0.5259, lo que sugiere que el modelo explica el 52.59% de la variabilidad en los datos transformados.</li></ul>
+<li><ul>El p-valor del F-statistic es prácticamente cero, lo que indica que el modelo es significativo.</li></ul>
+
+
+<b>Transformación Raíz Cuadrada:</b> La raíz cuadrada es otra transformación útil para abordar problemas de no linealidad. Puede ayudar a estabilizar la varianza y linealizar la relación entre las variables.
 ```{r}
+# Aplicar transformación de raíz cuadrada a la variable de respuesta
+vivienda4$preciom_sqrt <- sqrt(vivienda4$preciom)
+
+# Volver a estimar el modelo con la variable transformada
+modelo_regresion_sqrt <- lm(preciom_sqrt ~ areaconst, data = vivienda4)
+
+# Mostrar el resumen del nuevo modelo
+summary(modelo_regresion_sqrt)
 
 ```
+
+<li><ul> Se aplicó una transformación de raíz cuadrada a la variable de respuesta "preciom" para abordar problemas de no linealidad y estabilizar la varianza.</li></ul>
+<li><ul> Se aplicó una transformación de raíz cuadrada a la variable de respuesta "preciom" para abordar problemas de no linealidad y estabilizar la varianza.</li></ul>
+<li><ul> El valor de R cuadrado ajustado es 0.5216, lo que sugiere que el modelo explica el 52.16% de la variabilidad en los datos transformados.</li></ul>
+<li><ul> El p-valor del F-statistic es prácticamente cero, lo que indica que el modelo es significativo.</li></ul>   
+
+<b>Transformación Box-Cox:</b> La transformación de Box-Cox es una técnica más general que puede ayudar a identificar la mejor transformación posible. Puede utilizarse para buscar la potencia óptima que linealiza la relación entre las variables.
+```{r}
+# Calcular la transformación de Box-Cox para la variable de respuesta
+library(MASS)
+boxcox_lambda <- boxcox(modelo_regresion)
+
+# Aplicar la transformación de Box-Cox a la variable de respuesta con el lambda óptimo
+lambda_optimo <- boxcox_lambda$x[which.max(boxcox_lambda$y)]
+vivienda4$preciom_boxcox <- (vivienda4$preciom^lambda_optimo - 1) / lambda_optimo
+
+# Volver a estimar el modelo con la variable transformada
+modelo_regresion_boxcox <- lm(preciom_boxcox ~ areaconst, data = vivienda4)
+
+# Mostrar el resumen del nuevo modelo
+summary(modelo_regresion_boxcox)
+
+```
+
+
+<li><ul> Se aplicó la transformación de Box-Cox para identificar la mejor transformación posible. El lambda óptimo se determinó como 0.1141.</li></ul> 
+<li><ul> En el nuevo modelo, el coeficiente de la variable predictora "areaconst" es 0.03639, lo que significa que un incremento de una unidad en "areaconst" se asocia con un aumento de 0.03639 en la variable de respuesta transformada por Box-Cox.</li></ul> 
+<li><ul> El valor de R cuadrado ajustado es 0.5334, lo que sugiere que el modelo explica el 53.34% de la variabilidad en los datos transformados.</li></ul> 
+<li><ul> El p-valor del F-statistic es prácticamente cero, lo que indica que el modelo es significativo.</li></ul> 
 
 <h2>De ser necesario compare el ajuste y supuestos del modelo inicial y el transformado.</h2>
 
 
 ```{r}
+# Cargar las librerías necesarias
+library(car)
+library(broom)
+
+# Ajustar el modelo de regresión lineal inicial
+modelo_regresion_inicial <- lm(preciom ~ areaconst, data = vivienda4)
+
+# Calcular el intervalo de confianza del 95% para el coeficiente β1
+conf_int_inicial <- confint(modelo_regresion_inicial)
+
+# Realizar el diagnóstico del modelo inicial
+modelo_regresion_inicial_diagnostic <- influence.measures(modelo_regresion_inicial)
+
+# Ajustar un modelo de regresión lineal con la variable de respuesta transformada
+modelo_regresion_transformado <- lm(sqrt(preciom) ~ areaconst, data = vivienda4)
+
+# Calcular el intervalo de confianza del 95% para el coeficiente β1 en el modelo transformado
+conf_int_transformado <- confint(modelo_regresion_transformado)
+
+# Realizar el diagnóstico del modelo transformado
+modelo_regresion_transformado_diagnostic <- influence.measures(modelo_regresion_transformado)
+
+# Resumen de los modelos iniciales
+summary(modelo_regresion_inicial)
+
+# Resumen de los modelos transformados
+summary(modelo_regresion_transformado)
+
+# Comparar los intervalos de confianza de β1
+conf_int_inicial
+conf_int_transformado
+
+# Comparar los diagnósticos de los modelos
+anova(modelo_regresion_inicial, modelo_regresion_transformado)
+
 
 ```
 
-<h2>Estime varios modelos y compare los resultados obtenidos. En el mejor de los modelos, ¿se cumplen los supuestos sobre los errores?</h2>
+<p>
 
-```{r}
+1. <b>Resumen de los Modelos Iniciales y Transformados</b>:
+   - Modelo Inicial:
+     - El modelo inicial utiliza la variable de respuesta `preciom`.
+     - Coeficiente para el intercepto (β0): 4.771009 con un error estándar de 0.017982.
+     - Coeficiente para `areaconst` (β1): 0.006690 con un error estándar de 0.000182.
+     - El R-cuadrado ajustado es 0.5259, lo que significa que el modelo explica aproximadamente el 52.59% de la variabilidad en la variable de respuesta.
+   - Modelo Transformado:
+     - El modelo transformado utiliza la raíz cuadrada de la variable de respuesta, `sqrt(preciom)`.
+     - Coeficiente para el intercepto (β0): 2.1876154 con un error estándar de 0.0038928.
+     - Coeficiente para `areaconst` (β1): 0.0014358 con un error estándar de 0.0000394.
+     - El R-cuadrado ajustado es 0.5216, lo que significa que el modelo transformado explica aproximadamente el 52.16% de la variabilidad en la raíz cuadrada de la variable de respuesta.
 
-```
+2. <b>Comparación de los Intervalos de Confianza de β1</b>:
+   - Para el modelo inicial, el intervalo de confianza del 95% para el coeficiente de `areaconst` (β1) va desde 0.006332826 a 0.007047081.
+   - Para el modelo transformado, el intervalo de confianza del 95% para el coeficiente de `areaconst` (β1) va desde 0.001358485 a 0.001513103.
+
+3. <b>Comparación de los Diagnósticos de los Modelos</b>:
+   - El análisis de varianza (ANOVA) muestra que el modelo inicial y el modelo transformado son significativos (p-valor muy bajo), lo que significa que ambos modelos son adecuados para explicar la variabilidad en la variable de respuesta.
+
+En general, la comparación de los modelos inicial y transformado sugiere que ambos modelos son estadísticamente significativos, y los intervalos de confianza para el coeficiente `areaconst` son diferentes debido a la transformación de la variable de respuesta. Sin embargo, el impacto de la transformación en la calidad del ajuste no es significativo, ya que los valores de R-cuadrado ajustado son bastante similares en ambos modelos. La elección entre el modelo inicial y el modelo transformado dependerá de los objetivos del análisis y la interpretación de los coeficientes. </p>
 
 
-<h2>Con los resultados obtenidos construya un informe para los directivos de la inmobiliaria, indicando el modelo apropiado y sus principales características. A este informe se deben añadir los anexos como evidencia de la realización de los pasos anteriores.</h2>
+<h2>Anexos </h2>
+
+<p>Si quieres consultar el codigó de este informe puedes validarlo en este enlace:</p> <href> https://github.com/Jartpuro/Actividad_03</href>
