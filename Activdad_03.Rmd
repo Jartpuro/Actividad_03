@@ -564,3 +564,6 @@ En general, la comparación de los modelos inicial y transformado sugiere que am
 <h2>Anexos </h2>
 
 <p>Si quieres consultar el codigó de este informe puedes validarlo en este enlace:</p> <href> https://github.com/Jartpuro/Actividad_03</href>
+
+<p>O consultalo directamente desde RPubs:</p>
+<href>https://rpubs.com/jartpuro/1098590</href>
