@@ -3,16 +3,18 @@ title: "Actividad_03"
 author: "Jhon Alexander Rojas Tavera"
 date: "2023-10-13"
 output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: yes
   html_document:
     toc: yes
     toc_float: yes
-  pdf_document:
-    toc: yes
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 options(repos = c(CRAN = "https://cran.r-project.org"))
+
 
 ```
 
