@@ -1,0 +1,454 @@
+---
+title: "Actividad_03"
+author: "Jhon Alexander Rojas Tavera"
+date: "2023-10-13"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(repos = c(CRAN = "https://cran.r-project.org"))
+
+```
+
+
+```{r cars, message=FALSE, warning=FALSE, echo=FALSE}
+install.packages("devtools") # solo una vez
+
+devtools::install_github("dgonxalex80/paqueteMETODOS")
+
+library(paqueteMETODOS)
+
+data(vivienda4)
+```
+
+
+<h1>Problema</h1>
+<p>Con base en los datos de ofertas de vivienda descargadas del portal Fincaraiz para apartamento de estrato 4 con área construida menor a 200 m^2 (vivienda4.RDS) la inmobiliaria A&C requiere el apoyo de un científico de datos en la construcción de un modelo que lo oriente sobre los precios de inmuebles. <br> <br>Con este propósito el equipo de asesores a diseñado los siguientes pasos para obtener un modelo y así poder a futuro determinar los precios de los inmuebles a negociar </p> 
+
+
+
+
+<h2>Realice un análisis exploratorio de las variables precio de vivienda (millones de pesos COP) y área de la vivienda (metros cuadrados) - incluir gráficos e indicadores apropiados interpretados.</h2>
+
+```{r}
+data(vivienda4)
+```
+
+# Cargar las librerías necesarias para el análisis exploratorio
+library(ggplot2) # Para graficar
+library(dplyr)   # Para manipulación de datos
+library(summarytools) # Para resúmenes descriptivos
+
+
+# Cargar los datos del dataframe "vivienda4" si aún no se han cargado
+if (!exists("vivienda4")) {
+  data(vivienda4)
+}
+
+
+
+```{r}
+# 1. Validar datos faltantes por variable
+missing_data <- sapply(vivienda4, function(x) sum(is.na(x)))
+cat("Datos faltantes por variable:\n")
+print(missing_data)
+```
+
+```{r}
+# 2. Validar si existen datos vacíos o null dentro de las variables del dataframe
+if (any(is.na(vivienda4))) {
+  cat("El dataframe contiene valores nulos o vacíos.\n")
+}
+```
+
+```{r}
+# 3. Cuantificar valores duplicados y eliminarlos
+duplicated_count <- sum(duplicated(vivienda4))
+cat("Número de filas duplicadas:", duplicated_count, "\n")
+```
+
+```{r}
+# Eliminar filas duplicadas
+vivienda4 <- unique(vivienda4)
+
+```
+
+
+```{r}
+# 4. Dejar el dataframe final sin outliers (valores atípicos)
+# Puedes utilizar un criterio específico para definir outliers, por ejemplo, basado en desviaciones estándar
+# Para este ejemplo, se eliminarán observaciones con valores de "preciom" que estén a más de 3 desviaciones estándar de la media.
+
+# Calcular la media y desviación estándar de la variable "preciom"
+media_preciom <- mean(vivienda4$preciom)
+desviacion_preciom <- sd(vivienda4$preciom)
+
+```
+
+```{r}
+# Crear un vector lógico unidimensional para filtrar los outliers
+condicion_outliers <- abs((vivienda4$preciom - media_preciom) / desviacion_preciom) <= 3
+
+```
+
+
+```{r}
+vivienda4 <- vivienda4 %>%
+  filter(condicion_outliers)
+print(vivienda4)
+
+```
+
+
+
+
+```{r}
+# Resumen descriptivo de las variables "preciom" y "areaconst"
+desc_vars <- dfSummary(vivienda4[c("preciom", "areaconst")])
+```
+
+
+```{r}
+
+# Gráfico de dispersión preciom vs areaconst
+ggplot(vivienda4, aes(x = areaconst, y = preciom)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "cyan", se = FALSE) +  # Línea de tendencia
+  labs(x = "Área Construida (metros cuadrados)", y = "Precio (millones de pesos COP)") +
+  ggtitle("Gráfico de Dispersión Precio vs Área Construida con Línea de Tendencia")
+
+
+```
+
+```{r}
+# Histograma del preciom
+ggplot(vivienda4, aes(x = preciom)) +
+  geom_histogram(binwidth = 5, fill = "blue", color = "black") +
+  labs(x = "Precio (millones de pesos COP)", y = "Frecuencia") +
+  ggtitle("Histograma del Precio de Vivienda")
+```
+
+```{r}
+# Histograma del areaconst
+ggplot(vivienda4, aes(x = areaconst)) +
+  geom_histogram(binwidth = 10, fill = "green", color = "black") +
+  labs(x = "Área Construida (metros cuadrados)", y = "Frecuencia") +
+  ggtitle("Histograma del Área Construida de Vivienda")
+```
+
+<h2>Realice un análisis exploratorio bivariado de datos, enfocado en la relación entre la variable respuesta (precio) en función de la variable predictora (area construida) - incluir gráficos e indicadores apropiados interpretados.</h2>
+
+
+```{r}
+# Gráfico de dispersión precio vs área construida con línea de tendencia central
+ggplot(vivienda4, aes(x = areaconst, y = preciom)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "cyan", se = FALSE) +  # Línea de tendencia
+  labs(x = "Área Construida (metros cuadrados)", y = "Precio (millones de pesos COP)") +
+  ggtitle("Gráfico de Dispersión Precio vs Área Construida con Línea de Tendencia")
+
+
+```
+
+```{r}
+# Gráfico de caja y bigotes para precio por estrato
+ggplot(vivienda4, aes(x = as.factor(estrato), y = preciom)) +
+  geom_boxplot(fill = "lightblue") +
+  labs(x = "Estrato", y = "Precio (millones de pesos COP)") +
+  ggtitle("Gráfico de Caja y Bigotes de Precio por Estrato")
+
+```
+
+
+```{r}
+
+
+# Resumen descriptivo de la relación entre precio y área construida
+summary_precio_area <- vivienda4 %>%
+  select(preciom, areaconst)
+summary(summary_precio_area)
+
+print(summary_precio_area)
+
+```
+
+
+<h2>Estime el modelo de regresión lineal simple entre precio=f(area)+ε. Interprete los coeficientes del modelo β0, β1 en caso de ser correcto.</h2>
+
+
+```{r}
+# Estimar el modelo de regresión lineal simple
+modelo_regresion <- lm(preciom ~ areaconst, data = vivienda4)
+
+# Mostrar un resumen del modelo
+summary(modelo_regresion)
+
+```
+
+<p>Modelo de Regresión Lineal Simple entre Precio de Vivienda y Área Construida
+
+El presente análisis se centra en la relación entre el precio de las viviendas (expresado en millones de pesos COP) y el área construida de las mismas (en metros cuadrados). Para abordar esta relación, se ha estimado un modelo de regresión lineal simple, donde el precio se considera la variable de respuesta (preciom) y el área construida actúa como variable predictora (areaconst).
+
+Intercepto (β0) y Pendiente (β1):
+
+El coeficiente del intercepto (β0) en el modelo de regresión lineal simple es de 83.83857 millones de pesos COP. Sin embargo, su interpretación en este contexto puede carecer de significado práctico, ya que se refiere al precio estimado cuando el área construida es igual a cero, lo cual no tiene una interpretación realista en el contexto de bienes raíces.
+El coeficiente de la variable "areaconst" (β1) es de 1.60636. Esto significa que, por cada metro cuadrado adicional de área construida, se espera un incremento promedio en el precio de 1.60636 millones de pesos COP. En otras palabras, el precio promedio de una vivienda aumenta en aproximadamente 1.61 millones de pesos COP por cada metro cuadrado adicional de área construida.
+Estadísticas Adicionales:
+
+La mediana de los residuales es -8.411 millones de pesos COP, lo que sugiere que, en promedio, las predicciones del modelo tienden a subestimar el precio observado en 8.411 millones de pesos COP.
+El error estándar residual es de 54.01 millones de pesos COP, lo que representa la variabilidad no explicada por el modelo y refleja la dispersión de los valores alrededor de la línea de regresión.
+El valor de R-cuadrado múltiple es de 0.549, lo que indica que aproximadamente el 54.9% de la variabilidad en el precio se explica mediante la relación lineal con el área construida.
+El R-cuadrado ajustado es de 0.5486, lo que sugiere que el modelo es robusto y no se vería significativamente afectado al simplificarlo.
+La estadística F es de 1480 con un p-valor extremadamente bajo, lo que confirma la significatividad global del modelo de regresión.
+En conclusión, el modelo de regresión lineal simple proporciona evidencia de que existe una relación estadísticamente significativa entre el precio de las viviendas y el área construida. El incremento promedio en el precio por cada metro cuadrado adicional de área construida es de aproximadamente 1.61 millones de pesos COP. Aproximadamente el 54.9% de la variabilidad en el precio se explica mediante esta relación lineal. Estos resultados son fundamentales para comprender cómo el área construida influye en el precio de las viviendas y pueden ser útiles en la toma de decisiones en el mercado inmobiliario.</p>
+
+```{r}
+
+```
+
+
+<h2>Construir un intervalo de confianza (95%) para el coeficiente β1, interpretar y concluir si el coeficiente es igual a cero o no. Compare este resultado con una prueba de hipótesis t.</h2>
+
+
+```{r}
+# Obtener el valor crítico de la distribución t
+grados_libertad <- length(vivienda4$areaconst) - 2
+t_critico <- qt(0.975, df = grados_libertad)  # Para un intervalo de confianza del 95%
+
+# Calcular el intervalo de confianza para β1
+coef_beta1 <- coef(modelo_regresion)[2]  # Coeficiente β1
+se_beta1 <- summary(modelo_regresion)$coefficients[2, "Std. Error"]  # Error estándar de β1
+
+limite_inferior <- coef_beta1 - t_critico * se_beta1
+limite_superior <- coef_beta1 + t_critico * se_beta1
+
+# Mostrar el intervalo de confianza
+cat("Intervalo de Confianza (95%) para β1: [", limite_inferior, ", ", limite_superior, "]\n")
+
+```
+
+
+```{r}
+# Realizar la prueba de hipótesis t
+t_stat <- coef_beta1 / se_beta1
+grados_libertad <- length(vivienda4$areaconst) - 2
+p_valor <- 2 * (1 - pt(abs(t_stat), df = grados_libertad))
+
+# Mostrar el estadístico t y el p-valor
+cat("Estadístico t para β1:", t_stat, "\n")
+cat("P-valor de la prueba de hipótesis t:", p_valor, "\n")
+
+
+```
+
+<p> Intervalo de Confianza (95%) para β1:
+
+Se ha construido un intervalo de confianza del 95% para el coeficiente β1 en el modelo de regresión. El intervalo de confianza se encuentra entre 1.524437 y 1.688277.
+
+Interpretación: Esto significa que con un nivel de confianza del 95%, podemos afirmar que el coeficiente β1 está contenido en este intervalo. En otras palabras, es probable que el aumento promedio en el precio de una vivienda por cada metro cuadrado adicional de área construida esté entre 1.524437 y 1.688277 millones de pesos COP. El hecho de que el intervalo no incluya el valor cero sugiere que el coeficiente β1 no es igual a cero y que existe una relación significativa entre el precio y el área construida.
+
+Prueba de Hipótesis t:
+
+Se ha realizado una prueba de hipótesis t para evaluar si el coeficiente β1 es igual a cero (hipótesis nula) o no (hipótesis alternativa).
+
+Estadístico t para β1: El estadístico t es 38.47082.
+P-valor de la prueba de hipótesis t: El p-valor es 0.
+Interpretación: El p-valor de la prueba de hipótesis t es extremadamente bajo, prácticamente igual a cero. Esto significa que podemos rechazar la hipótesis nula (H0) que sugiere que el coeficiente β1 es igual a cero. En cambio, concluimos que el coeficiente β1 es significativamente diferente de cero. En otras palabras, hay evidencia estadística sólida de que existe una relación significativa entre el precio de las viviendas y el área construida.
+
+En resumen, tanto el intervalo de confianza como la prueba de hipótesis t respaldan la conclusión de que el coeficiente β1 no es igual a cero, lo que indica que el área construida tiene un impacto significativo en el precio de las viviendas. Estos resultados son fundamentales para comprender y modelar la relación entre estas dos variables en el contexto del mercado inmobiliario.</p>
+
+
+
+```{r}
+
+
+# Gráfico del intervalo de confianza para β1
+library(ggplot2)
+
+# Datos del intervalo de confianza
+intervalo_confianza <- data.frame(Intervalo = c("IC 95% para β1"), 
+                                  Limite_Inferior = limite_inferior, 
+                                  Limite_Superior = limite_superior,
+                                  Estimado = coef_beta1)
+
+# Crear el gráfico
+ggplot(intervalo_confianza, aes(x = Intervalo, y = Estimado)) +
+  geom_point(color = "blue", size = 3) +
+  geom_errorbar(aes(ymin = Limite_Inferior, ymax = Limite_Superior), width = 0.2, color = "red") +
+  labs(x = "", y = "Coeficiente β1") +
+  ggtitle("Intervalo de Confianza (95%) para β1") +
+  theme_minimal()
+
+```
+
+
+<h2>Calcule e interprete el indicador de bondad R2.</h2>
+
+
+```{r}
+# Calcular R² (Coeficiente de Determinación)
+R_cuadrado <- summary(modelo_regresion)$r.squared
+
+# Mostrar el valor de R²
+cat("Coeficiente de Determinación (R²):", R_cuadrado, "\n")
+
+```
+
+<p> 
+Coeficiente de Determinación (R²) en el Modelo de Regresión
+
+El coeficiente de determinación (R²) es un indicador fundamental en análisis de regresión que mide la proporción de la variabilidad en la variable de respuesta (en este caso, el precio de las viviendas) que puede ser explicada por el modelo de regresión lineal simple con el área construida como variable predictora.
+
+En el presente análisis, el valor de R² es igual a 0.548962, lo que significa que aproximadamente el 54.9% de la variabilidad en los precios de las viviendas se encuentra explicada por la relación lineal con el área construida. En otras palabras, más de la mitad de la variación en los precios de las viviendas puede ser atribuida al tamaño del área construida de las mismas según el modelo.
+</p>
+```{r}
+
+```
+
+<h2>¿Cuál sería el precio promedio estimado para un apartamento de 110  metros cuadrados? Considera entonces con este resultado que un apartamento en la misma zona con 110  metros cuadrados en un precio de 200 millones sería una atractiva esta oferta? ¿Qué consideraciones adicionales se deben tener?.</h2>
+
+
+```{r}
+# Definir el valor de área construida
+area_construida_estimada <- 110  # Metros cuadrados
+
+# Calcular el precio estimado utilizando el modelo de regresión
+precio_estimado <- coef(modelo_regresion)[1] + coef(modelo_regresion)[2] * area_construida_estimada
+
+# Mostrar el precio estimado
+cat("Precio estimado para un apartamento de 110 metros cuadrados:", precio_estimado, "millones de pesos COP\n")
+
+
+```
+
+<p>
+Precio Estimado para un Apartamento de 110 Metros Cuadrados
+
+Utilizando el modelo de regresión lineal simple, hemos calculado el precio estimado para un apartamento de 110 metros cuadrados en la misma zona de interés. El precio estimado es de 260.5378 millones de pesos COP.
+
+Ahora, considerando este resultado, podemos evaluar si una oferta de un apartamento en la misma zona con 110 metros cuadrados a un precio de 200 millones de pesos sería atractiva:
+
+Comparación de Precios: El precio estimado es significativamente mayor que el precio de la oferta, ya que el precio estimado es de 260.5378 millones de pesos COP, mientras que el precio de la oferta es de 200 millones de pesos COP. Esto indica que el precio de la oferta es considerablemente inferior al precio estimado.
+
+Atractivo de la Oferta: Desde una perspectiva puramente basada en el precio, la oferta de un apartamento de 110 metros cuadrados a un precio de 200 millones de pesos podría considerarse atractiva, ya que está por debajo del precio estimado.
+</p>
+
+```{r}
+# Precio de la oferta y precio estimado
+precio_oferta <- 200  # Precio de la oferta en millones de pesos COP
+precio_estimado <- 260.5378  # Precio estimado en millones de pesos COP
+
+# Crear un dataframe para el gráfico
+data_grafico <- data.frame(Variable = c("Precio de la Oferta", "Precio Estimado"),
+                           Precio = c(precio_oferta, precio_estimado))
+
+# Crear el gráfico de barras
+library(ggplot2)
+ggplot(data_grafico, aes(x = Variable, y = Precio, fill = Variable)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  labs(y = "Precio (millones de pesos COP)", title = "Comparación de Precio de Oferta y Precio Estimado") +
+  theme_minimal() +
+  scale_fill_manual(values = c("Precio de la Oferta" = "red", "Precio Estimado" = "blue"))
+
+```
+
+
+<h2>Realice la validación de los supuestos del modelo por medio de gráficos apropiados, interpretarlos y sugerir posibles soluciones si se violan algunos de ellos. Utilice las pruebas de hipótesis para la validación de supuestos y compare los resultados con lo observado en los gráficos asociados.</h2>
+
+
+
+<p>
+Supuesto de Linealidad:
+Para verificar el supuesto de linealidad y la autocorrelación de los residuales:
+</p>
+```{r}
+
+# Gráfico de Residuales vs. Valores Ajustados
+plot(modelo_regresion, which = 1)
+
+# Prueba de Durbin-Watson
+library(car)
+durbinWatsonTest(modelo_regresion)
+
+```
+
+<p>
+
+Gráfico de Residuales vs. Valores Ajustados: El gráfico muestra la dispersión de los residuales en función de los valores ajustados. Se busca una distribución aleatoria y uniforme de los puntos alrededor de la línea horizontal. En este caso, se observa cierta tendencia en los residuales a medida que los valores ajustados aumentan, lo que indica una posible violación del supuesto de linealidad.
+
+Prueba de Durbin-Watson: La prueba de Durbin-Watson evalúa la autocorrelación de los residuales. El estadístico D-W es 1.642903, y el valor p es cero. Un valor de D-W significativamente diferente de 2 (el valor ideal) sugiere autocorrelación. En este caso, D-W es menor que 2, lo que indica la presencia de autocorrelación positiva entre los residuales. Esto sugiere una posible violación del supuesto de independencia, lo que podría requerir una corrección.
+</p>
+
+
+
+
+<p>
+Supuesto de Homocedasticidad:
+Para verificar el supuesto de homocedasticidad:
+</p>
+```{r}
+# Gráfico de Residuales vs. Orden
+plot(modelo_regresion, which = 2)
+
+# Prueba de Ljung-Box
+library(astsa)
+Box.test(resid(modelo_regresion), lag = 20, type = "Ljung")
+
+```
+<p>
+Gráfico de Residuales vs. Orden: Este gráfico muestra los residuales en función de su orden o secuencia en los datos. El supuesto de homocedasticidad se relaciona con la dispersión constante de los residuales a lo largo del tiempo. En este caso, no se observa una clara estructura en forma de embudo o cono en el gráfico, lo que sugiere que la homocedasticidad es razonable.
+
+Prueba de Ljung-Box: La prueba de Ljung-Box se utiliza para evaluar la autocorrelación de los residuales a través de varios retrasos. El valor de X-squared es 139.85, con un p-valor muy bajo (prácticamente cero). Esto indica la presencia de autocorrelación entre los residuales en diferentes retrasos. La significatividad de esta prueba respalda la presencia de autocorrelación positiva en los residuales y sugiere una violación del supuesto de independencia.
+</p>
+
+<p>
+Supuesto de Normalidad de los Residuales:
+Para verificar el supuesto de normalidad de los residuales:
+</p>
+```{r}
+# Gráfico Q-Q
+qqnorm(resid(modelo_regresion))
+qqline(resid(modelo_regresion))
+
+# Prueba de Shapiro-Wilk
+shapiro.test(resid(modelo_regresion))
+
+```
+<p>
+Gráfico Q-Q: El gráfico Q-Q compara la distribución de los residuales con una distribución normal. Idealmente, los puntos se alinearían en una línea diagonal. En este caso, se observa cierta desviación de la línea diagonal en los extremos del gráfico, lo que sugiere una posible desviación de la normalidad.
+
+Prueba de Shapiro-Wilk: La prueba de Shapiro-Wilk evalúa si los residuales siguen una distribución normal. El valor de W es 0.97692, y el p-valor es 4.908e-13, lo que es extremadamente bajo. Un p-valor bajo indica que los residuales no siguen una distribución normal. En este caso, la prueba rechaza la hipótesis de normalidad, sugiriendo una violación del supuesto.
+</p>
+
+<h2>De ser necesario realice una transformación apropiada para mejorar el ajuste y supuestos del modelo.</h2>
+
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+<h2>De ser necesario compare el ajuste y supuestos del modelo inicial y el transformado.</h2>
+
+
+```{r}
+
+```
+
+<h2>Estime varios modelos y compare los resultados obtenidos. En el mejor de los modelos, ¿se cumplen los supuestos sobre los errores?</h2>
+
+```{r}
+
+```
+
+
+<h2>Con los resultados obtenidos construya un informe para los directivos de la inmobiliaria, indicando el modelo apropiado y sus principales características. A este informe se deben añadir los anexos como evidencia de la realización de los pasos anteriores.</h2>
